@@ -19,19 +19,5 @@ jobs:
         docker compose up -d --build
         docker ps -a
         sleep 20
-
-        # CREATE DATABASES
-        docker exec -i twitter_postgres_parallel-pg_normalized psql -U postgres -c "CREATE DATABASE pg_normalized;"
-        docker exec -i twitter_postgres_parallel-pg_normalized psql -U postgres -c "CREATE DATABASE pg_denormalized;"
-
-        # LOAD SCHEMAS
-        docker exec -i twitter_postgres_parallel-pg_normalized psql -U postgres -d pg_normalized -f services/pg_normalized/schema.sql
-        docker exec -i twitter_postgres_parallel-pg_normalized psql -U postgres -d pg_denormalized -f services/pg_normalized/schema.sql
-
-        # RUN YOUR SCRIPT
-        ./load_tweets_sequential.sh
-
-        # RUN TESTS
-        docker compose exec -T pg_normalized ./run_tests.sh
         ./load_tweets_sequential.sh
         docker compose exec -T pg_normalized ./run_tests.sh
