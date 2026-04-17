@@ -1,5 +1,3 @@
-version: '3.3'
-
 services:
   pg_denormalized:
     build: services/pg_denormalized
@@ -11,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=pass
       - PGUSER=postgres
     ports:
-      - 5440:5432
+      - 21001:5432
 
   pg_normalized:
     build: services/pg_normalized
@@ -23,7 +21,7 @@ services:
       - POSTGRES_PASSWORD=pass
       - PGUSER=postgres
     ports:
-      - 5441:5432
+      - 21002:5432
 
   pg_normalized_batch:
     build: services/pg_normalized_batch
@@ -35,7 +33,7 @@ services:
       - POSTGRES_PASSWORD=pass
       - PGUSER=postgres
     ports:
-      - 5442:5432
+      - 21003:5432
 
 volumes:
     pg_normalized:
